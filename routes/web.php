@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,19 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-//basic routing
+// //basic routing
 
-Route::get('/hello', function () {
-    return 'Hello World';
-});
+// Route::get('/hello', function () {
+//     return 'Hello World';
+// });
 
-Route::get('/world', function() {
-    return 'World';
-});
+// Route::get('/world', function() {
+//     return 'World';
+// });
 
 Route::get('/', function() {
     return 'Selamat Datang';
@@ -43,20 +47,28 @@ Route::get('/user/{Azka}', function($name) {
 
 Route::get('/posts/{post1}/comments/{comment5}', function
 ($postId, $commentId) {
-    return 'Pos ke-'.$postId." Komentar ke-1: ".$commentId;
+    return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
 });
 
 Route::get('/articels/{article1234}', function($id) {
     return 'Halaman Artikel dengan ID '.$id;
 });
 
-//optional parameters
+// //optional parameters
 
-Route::get('/user/{Azka?}', function($name=null) {
-    return 'Nama saya '.$name;
-});
+// Route::get('/user/{Azka?}', function($name=null) {
+//     return 'Nama saya '.$name;
+// });
 
 Route::get('/user/{name?}', function($name='John') {
     return 'Nama saya '.$name;
 });
 
+//membuat controller
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+Route::get('/', [HomeController::class,'index']);
+
+Route::get('/about', [AboutController::class,'about']);
+
+Route::get('/articles/{id}', [ArticleController::class,'articles']);
