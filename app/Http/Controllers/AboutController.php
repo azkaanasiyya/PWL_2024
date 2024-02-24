@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-    public function about() {
+    public function index() {
         return 'NIM: 2241720157 <br> Nama: Azka Anasiyya Haris';
     }
 }

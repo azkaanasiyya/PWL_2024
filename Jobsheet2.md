@@ -119,8 +119,108 @@ Maka nama yang muncul adalah nilai default dari parameternya yaitu "John".
 
 ### Praktikum 2
 #### Membuat Controller
+1. Setelah sebuah controller telah didefinisikan action, kita dapat menambahkan controller
+tersebut pada route. Ubah route /hello menjadi seperti berikut:
+```
+Route::get(‘/hello’, [WelcomeController::class,’hello’]);
+```
+Buka browser, tuliskan URL untuk memanggil route tersebut:
+localhost/PWL_2024/public/hello. Perhatikan halaman yang muncul dan jelaskan
+pengamatan Anda
 
+Hasil:
+<img src = .\img\12.png>
 
+2. Modifikasi hasil pada praktikum poin 2 (Routing) dengan konsep controller. Pindahkan
+logika eksekusi ke dalam controller dengan nama PageController
+
+Hasil:
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PageController extends Controller
+{
+    public function index() {
+        return 'Selamat Datang';
+    }
+
+    public function about() {
+        return 'NIM: 2241720157 <br> Nama: Azka Anasiyya Haris';
+    }
+
+    public function articles($id) {
+        return 'Halaman Artikel dengan ID '.$id;
+    }
+}
+```
+
+3. Modifikasi kembali implementasi sebelumnya dengan konsep Single Action Controller.
+Sehingga untuk hasil akhir yang didapatkan akan ada HomeController,
+AboutController dan ArticleController. Modifikasi juga route yang
+digunakan.
+
+Hasil:
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    public function index() {
+        return 'Selamat Datang';
+    }
+}
+```
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class AboutController extends Controller
+{
+    public function index() {
+        return 'NIM: 2241720157 <br> Nama: Azka Anasiyya Haris';
+    }
+}
+```
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ArticleController extends Controller
+{
+    public function index($id) {
+        return 'Halaman Artikel dengan ID '.$id;
+    }
+}
+```
+
+#### Resource Controller
+1. Untuk membuatnya dilakukan dengan menjalankan perintah berikut ini di terminal.
+```
+php artisan make:controller PhotoController --resource
+```
+Setelah controller berhasil degenerate, selanjutnya harus dibuatkan route agar dapat
+terhubung dengan frontend. Tambahkan kode program berikut pada file web.php
+```
+use App\Http\Controllers\PhotoController;
+Route::resource('photos', PhotoController::class);
+```
+Hasil:
+Jalankan cek list route (php artisan route:list)
+<img src = .\img\13.png>
 
 
 
