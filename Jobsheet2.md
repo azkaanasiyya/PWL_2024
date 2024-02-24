@@ -356,18 +356,429 @@ Sales yang digunakan untuk membantu penjualan.
 Buatlah beberapa route, controller, dan view sesuai dengan ketentuan sebagai berikut.
 1. Halaman Home
 Menampilkan halaman awal website
+
+Hasil:
+
+Route
+```
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class,'index']);
+```
+Controller
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    public function index() {
+        return view('home');
+    }
+}
+```
+View
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Home</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #d972a7;
+        text-align: center;
+        background-color: #ded8db;
+        padding: 50px;
+    }
+</style>
+<body>
+  <h1>Selamat datang di Halaman Home Azka</h1>
+  <p><strong>Halaman ini dibuat dengan sederhana seperti kepribadian saya yang anggun dan sederhana.</strong></p>
+</body>
+</html>
+```
+Output
+<img src = .\img\21.png>
+
 2. Halaman Products
 Menampilkan daftar product (route prefix)
 /category/food-beverage
 /category/beauty-health
 /category/home-care
 /category/baby-kid
+
+Hasil:
+
+Route
+```
+use App\Http\Controllers\ProductController;
+
+Route::prefix('category')->group(function() {
+    Route::get('/food-beverage', [ProductController::class, 'foodBeverage']);
+    Route::get('/beauty-health', [ProductController::class, 'beautyHealth']);
+    Route::get('/home-care', [ProductController::class, 'homeCare']);
+    Route::get('/baby-kid', [ProductController::class, 'babyKid']);
+});
+```
+Controller
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProductController extends Controller
+{
+    public function foodBeverage(){
+        return view('food');
+    }
+    public function beautyHealth(){
+        return view('beauty');
+    }
+    public function homeCare(){
+        return view('homeC');
+    }
+    public function babyKid(){
+        return view('baby');
+    }
+}
+```
+View
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Product</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #942c62;
+        background-color: #bbb3b7;
+        padding: 50px;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div style="text-align: center">
+        <h1>Category Food Beverage</h1>
+    </div>
+    <ol>
+        <ul><strong>Hewani</strong>
+            <li>Daging: Sapi, Babi, Ayam, Kambing, Domba</li>
+            <li>Unggas: Ayam, Kalkun, Bebek, Angsa</li>
+            <li>Ikan: Salmon, Tuna, Cod</li>
+            <li>Telur: Telur ayam, Telur bebek, Telur angsa</li>
+            <li>Susu: Susu sapi, Susu kambing, Susu domba</li>
+        </ul>
+        <ul><strong>Tanaman</strong>
+            <li>Buah: Apel, Pisang, Jeruk, Anggur</li>
+            <li>Sayur: Brokoli, Wortel, Bayam, Sawi</li>
+            <li>Biji: Beras, Gandum, Jagung</li>
+            <li>Kacang: Almond, Mente, Walnut</li>
+        </ul>
+        <ul><strong>Jamur</strong>
+            <li>Jamur: kancing, jamur enoki, jamur kuping</li>
+            <li>Ragi: Ragi roti, Ragi bir, Ragi anggur</li>
+        </ul>
+    </ol>
+</body>
+</html>
+```
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Product</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #db177c;
+        background-color: #211f20;
+        padding: 50px;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div style="text-align: center">
+        <h1>Category Beauty Health</h1>
+    </div>
+    <ol>
+        <ul><strong>Skin Care</strong>
+            <li>Cleanser and Toners</li>
+            <li>Moisturizers and Serums</li>
+            <li>Sunscreen</li>
+            <li>Treatments(acne, anti-aging)</li>
+            <li>Mask and Peels</li>
+        </ul>
+        <ul><strong>Hair Care</strong>
+            <li>Shampoos and Conditioners</li>
+            <li>Styling Products (gels, sprays)</li>
+            <li>Hair Treatments (mask, oils)</li>
+            <li>Hair Color and Styling Tools</li>
+        </ul>
+        <ul><strong>Makeup</strong>
+            <li>Foundation and Concelare</li>
+            <li>Powder and Blush</li>
+            <li>Eye Shadow and Liner</li>
+            <li>Mascara and Lipstik</li>
+        </ul>
+    </ol>
+</body>
+</html>
+```
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Product</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #ac6c8d;
+        background-color: #302e2f;
+        padding: 50px;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div style="text-align: center">
+        <h1>Category Home Care</h1>
+    </div>
+    <ol>
+        <ul><strong>Layanan Kebersihan Rumah</strong>
+            <li>Menyapu dan mengepel</li>
+            <li>Membersihkan kamar mandi</li>
+            <li>Membersihkan dapur</li>
+            <li>Mengganti sprei dan sarung bantal</li>
+        </ul>
+        <ul><strong>Perawatan Ibu dan Bayi</strong>
+            <li>Merawat bayi</li>
+            <li>Memberikan ASI</li>
+            <li>Memantau kesehatan ibu dan bayi</li>
+            <li>Mengajari ibu tentang cara merawat bayi</li>
+        </ul>
+        <ul><strong>Perawatan Luka</strong>
+            <li>Membersihkan luka</li>
+            <li>Mengganti perban</li>
+            <li>Memberikan obat</li>
+            <li>Memantau kondisi luka</li>
+        </ul>
+    </ol>
+</body>
+</html>
+```
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Product</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #af879c;
+        background-color: #514e50;
+        padding: 50px;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div style="text-align: center">
+        <h1>Category Baby Kid</h1>
+    </div>
+    <ol>
+        <ul><strong>Perlengkapan Bayi Baru Lahir</strong>
+            <li>Popok dan tisu basah</li>
+            <li>Pakaian</li>
+            <li>Selimut dan bedong</li>
+            <li>Botol susu dan dot</li>
+            <li>Perlengkapan mandi</li>
+        </ul>
+        <ul><strong>Makanan Bayi</strong>
+            <li>Susu formula</li>
+            <li>ASI</li>
+            <li>Makanan pendamping ASI (MPASI)</li>
+            <li>Snack bayi</li>
+        </ul>
+        <ul><strong>Perlengkapan Menyusui</strong>
+            <li>Pompa ASI</li>
+            <li>Bantal menyusui</li>
+            <li>Dot susu</li>
+            <li>Bra menyusui</li>
+        </ul>
+    </ol>
+</body>
+</html>
+```
+Output
+<img src = .\img\22.png>
+<img src = .\img\23.png>
+<img src = .\img\24.png>
+<img src = .\img\25.png>
+
 3. Halaman User
 Menampilkan profil pengguna (route param)
 /user/{id}/name/{name}
+
+Hasil:
+
+Route
+```
+use App\Http\Controllers\UserController;
+
+Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
+```
+Controller
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function index($id, $name) {
+        return view('user', ['id'=>$id, 'name'=>$name]);
+    }
+}
+```
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman User</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #eb76b2;
+        background-color: #d7d1d4;
+        padding: 50px;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div style="text-align: center">
+        <h1>Halaman Profile</h1>
+    </div>
+    <ol>
+        <ul><strong>Profile User: </strong>
+            <li>Id: {{$id}}</li>
+            <li>Nama: {{$name}}</li>
+            <li>Kelas: TI-2F</li>
+            <li>Prodi: D4 Teknik Informatika</li>
+            <li>Jurusan: Teknologi Informasi</li>
+    </ol>
+</body>
+</html>
+```
+Output
+<img src = .\img\26.png>
+
 4. Halaman Penjualan
 Menampilkan halaman transaksi POS
 
+Hasil:
+
+Route
+```
+use App\Http\Controllers\PenjualanController;
+
+Route::get('/penjualan', [PenjualanController::class, 'index']);
+```
+Controller
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PenjualanController extends Controller
+{
+    public function index() {
+        return view('penjualan');
+    }
+}
+```
+View
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Penjualan</title>
+</head>
+<style>
+    body {
+        font-family: 'Perpetua', serif;
+        color: #5c0733;
+        background-color: #d7d1d4;
+        padding: 50px;
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div style="text-align: center">
+        <h1>Halaman Transaksi</h1>
+    </div>
+    <ol>
+        <ul><strong>Transaksi 1: </strong>
+            <li>Sabun Mandi</li>
+            <li>Sikat Gigi</li>
+            <li>Parfume</li>
+            <li>Sandal</li>
+            <li>Baju</li>
+        </ul>
+        <ul><strong>Transaksi 2: </strong>
+            <li>Mie Instan</li>
+            <li>Beras</li>
+            <li>Telur</li>
+            <li>Kecap</li>
+            <li>Minyak Goreng</li>
+        </ul>
+    </ol>
+</body>
+</html>
+```
+Output
+<img src = .\img\27.png>
+
+#### Nomor 4
+Route tersebut menjalankan fungsi pada Controller yang berbeda di setiap halaman.
+
+#### Nomor 5
+Fungsi pada Controller akan memanggil view sesuai halaman yang akan ditampilkan.
+
+#### Nomor 6
+Simpan setiap perubahan yang dilakukan pada project POS pada Git, sinkronisasi
+perubahan ke Github
+
+Hasil:
+<img src = .\img\28.png>
 
 
 
