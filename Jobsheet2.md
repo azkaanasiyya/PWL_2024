@@ -6,7 +6,7 @@
 
 ## NIM : 2241720157
 
-### Praktikum 1 
+### Praktikum 1 : Routing
 #### Basic Routing
 1. Buka file routes/web.php. Tambahkan sebuah route untuk nomor 1 seperti di bawah
 ini
@@ -117,7 +117,7 @@ Hasil:
 <img src = .\img\11.png>
 Maka nama yang muncul adalah nilai default dari parameternya yaitu "John".
 
-### Praktikum 2
+### Praktikum 2 : Controller
 #### Membuat Controller
 1. Setelah sebuah controller telah didefinisikan action, kita dapat menambahkan controller
 tersebut pada route. Ubah route /hello menjadi seperti berikut:
@@ -135,6 +135,14 @@ Hasil:
 logika eksekusi ke dalam controller dengan nama PageController
 
 Hasil:
+
+Pada routes/web.php
+```
+Route::get('/', [PageController::class,'index']);
+Route::get('/about', [PageController::class,'about']);
+Route::get('/articles/{id}', [PageController::class,'articles']);
+```
+Pada /Controller/PageController.php
 ```
 <?php
 
@@ -206,6 +214,16 @@ class ArticleController extends Controller
     }
 }
 ```
+Pada routes/web.php
+```
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+Route::get('/', [HomeController::class,'index']);
+
+Route::get('/about', [AboutController::class,'about']);
+
+Route::get('/articles/{id}', [ArticleController::class,'articles']);
+```
 
 #### Resource Controller
 1. Untuk membuatnya dilakukan dengan menjalankan perintah berikut ini di terminal.
@@ -221,6 +239,111 @@ Route::resource('photos', PhotoController::class);
 Hasil:
 Jalankan cek list route (php artisan route:list)
 <img src = .\img\13.png>
+
+### Praktikum 3 : View
+#### Membuat View
+1. Pada direktori app/resources/views, buatlah file hello.blade.php.
+```
+<!-- View pada resources/views/hello.blade.php -->
+<html>
+    <body>
+    <h1>Hello, {{ $name }}</h1>
+    </body>
+</html>
+```
+View tersebut dapat dijalankan melalui Routing, dimana route akan memanggil View
+sesuai dengan nama file tanpa ‘blade.php’.
+```
+Route::get('/greeting', function () {
+return view('hello', ['name' => 'Andi']);
+});
+```
+Hasil:
+
+URL: localhost/PWL_2024/public/greeting
+<img src = .\img\14.png>
+Maka ketika kita menjalankan URL tersebut akan memanggil fungsi yang mengembalikan view hello yang berisikan statement tersebut.
+
+#### View dalam Direktori
+1. Buatlah direktori blog di dalam direktori views dan lakukan perubahan pada route.
+```
+Route::get('/greeting', function () {
+return view('blog.hello', ['name' => 'Azka']);
+});
+```
+Hasil:
+
+Membuat direktori blog
+<img src = .\img\15.png>
+URL: localhost/PWL_2024/public/greeting
+<img src = .\img\16.png>
+Berdasarkan praktikum tersebut, jika menggunakan dot(.) maka ketika file yang dipanggil berada dalam folder lain, dot(.) berfungsi untuk mendefinisikan lokasi file hello tersebut berada
+
+#### Menampilkan View dari Controller
+1. Buka WelcomeController.php dan tambahkan fungsi baru yaitu greeting.
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class WelcomeController extends Controller
+{
+    public function hello() {
+        return 'Hello World';
+    }
+
+    public function greeting() {
+        return view('blog.hello', ['name' => 'Azka']);
+    }
+}
+```
+Ubah route /greeting dan arahkan ke WelcomeController pada fungsi greeting.
+```
+Route::get('/greeting', [WelcomeController::class,
+'greeting']);
+```
+Hasil:
+
+URL: localhost/PWL_2024/public/greeting
+<img src = .\img\17.png>
+Maka hasil dari perubahan diatas sama seperti hasil sebelumnya, hanya saja kita memanggil file WelcomeController yang terdapat fungsi greeting, maka akan menghasilkan seperti pada gambar tersebut.
+
+#### Meneruskan Data ke View
+1. Buka WelcomeController.php dan tambahkan ubah fungsi greeting.
+```
+class WelcomeController extends Controller
+{
+    public function hello() {
+        return 'Hello World';
+    }
+
+    public function greeting(){
+        return view('blog.hello') 
+        ->with('name','Azka')
+        ->with('occupation','Astronaut');
+    }
+}
+```
+Ubah hello.blade.php agar dapat menampilkan dua parameter
+```
+<html>
+    <body>
+    <h1>Hello, {{ $name }}</h1>
+    <h1>You are {{ $occupation }}</h1>
+    </body>
+</html>
+```
+Hasil:
+
+URL: localhost/PWL_2024/public/greeting
+<img src = .\img\18.png>
+Maka dari hasil tersebut telah berhasil menggunakan nilai terhadap variabel pada controller, sehingga nilai dari variabel tersebut diteruskan ke view.
+
+
+
+
 
 
 

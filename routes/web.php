@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
@@ -65,6 +66,10 @@ Route::get('/user/{name?}', function($name='John') {
     return 'Nama saya '.$name;
 });
 
+Route::get('/', [PageController::class,'index']);
+Route::get('/about', [PageController::class,'about']);
+Route::get('/articles/{id}', [PageController::class,'articles']);
+
 //membuat controller
 Route::get('/hello', [WelcomeController::class,'hello']);
 
@@ -76,3 +81,12 @@ Route::get('/articles/{id}', [ArticleController::class,'articles']);
 
 //resource controller
 Route::resource('photos', PhotoController::class);
+
+// //membuat view
+// Route::get('/greeting', function () {
+//     return view('blog.hello', ['name' => 'Azka']);
+// });
+
+//menampilkan view dari controller
+Route::get('/greeting', [WelcomeController::class,
+'greeting']);
