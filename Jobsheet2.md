@@ -341,6 +341,33 @@ URL: localhost/PWL_2024/public/greeting
 <img src = .\img\18.png>
 Maka dari hasil tersebut telah berhasil menggunakan nilai terhadap variabel pada controller, sehingga nilai dari variabel tersebut diteruskan ke view.
 
+### Soal Praktikum
+#### Nomor 1
+Jalankan Langkah-langkah Praktikum pada jobsheet di atas. Lakukan sinkronisasi
+perubahan pada project PWL_2024 ke Github
+<img src = .\img\19.png>
+
+#### Nomor 2
+Buatlah project baru dengan nama POS. Project ini merupakan sebuah aplikasi Point of
+Sales yang digunakan untuk membantu penjualan.
+<img src = .\img\20.png>
+
+#### Nomor 3
+Buatlah beberapa route, controller, dan view sesuai dengan ketentuan sebagai berikut.
+1. Halaman Home
+Menampilkan halaman awal website
+2. Halaman Products
+Menampilkan daftar product (route prefix)
+/category/food-beverage
+/category/beauty-health
+/category/home-care
+/category/baby-kid
+3. Halaman User
+Menampilkan profil pengguna (route param)
+/user/{id}/name/{name}
+4. Halaman Penjualan
+Menampilkan halaman transaksi POS
+
 
 
 
