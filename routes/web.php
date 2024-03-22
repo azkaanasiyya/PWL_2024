@@ -19,9 +19,9 @@ use App\Http\Controllers\PhotoController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // //basic routing
 
@@ -33,60 +33,60 @@ use App\Http\Controllers\PhotoController;
 //     return 'World';
 // });
 
-Route::get('/', function() {
-    return 'Selamat Datang';
-});
+// Route::get('/', function() {
+//     return 'Selamat Datang';
+// });
 
-Route::get('/about', function() {
-    return 'NIM: 2241720157 <br> Nama: Azka Anasiyya Haris';
-});
+// Route::get('/about', function() {
+//     return 'NIM: 2241720157 <br> Nama: Azka Anasiyya Haris';
+// });
 
-//route parameters
+// //route parameters
 
-Route::get('/user/{Azka}', function($name) {
-    return 'Nama saya '.$name;
-});
-
-Route::get('/posts/{post1}/comments/{comment5}', function
-($postId, $commentId) {
-    return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
-});
-
-Route::get('/articels/{article1234}', function($id) {
-    return 'Halaman Artikel dengan ID '.$id;
-});
-
-// //optional parameters
-
-// Route::get('/user/{Azka?}', function($name=null) {
+// Route::get('/user/{Azka}', function($name) {
 //     return 'Nama saya '.$name;
 // });
 
-Route::get('/user/{name?}', function($name='John') {
-    return 'Nama saya '.$name;
-});
-
-Route::get('/', [PageController::class,'index']);
-Route::get('/about', [PageController::class,'about']);
-Route::get('/articles/{id}', [PageController::class,'articles']);
-
-//membuat controller
-Route::get('/hello', [WelcomeController::class,'hello']);
-
-Route::get('/', [HomeController::class,'index']);
-
-Route::get('/about', [AboutController::class,'about']);
-
-Route::get('/articles/{id}', [ArticleController::class,'articles']);
-
-//resource controller
-Route::resource('photos', PhotoController::class);
-
-// //membuat view
-// Route::get('/greeting', function () {
-//     return view('blog.hello', ['name' => 'Azka']);
+// Route::get('/posts/{post1}/comments/{comment5}', function
+// ($postId, $commentId) {
+//     return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
 // });
 
-//menampilkan view dari controller
-Route::get('/greeting', [WelcomeController::class,
-'greeting']);
+// Route::get('/articels/{article1234}', function($id) {
+//     return 'Halaman Artikel dengan ID '.$id;
+// });
+
+// // //optional parameters
+
+// // Route::get('/user/{Azka?}', function($name=null) {
+// //     return 'Nama saya '.$name;
+// // });
+
+// Route::get('/user/{name?}', function($name='John') {
+//     return 'Nama saya '.$name;
+// });
+
+// Route::get('/', [PageController::class,'index']);
+// Route::get('/about', [PageController::class,'about']);
+// Route::get('/articles/{id}', [PageController::class,'articles']);
+
+// //membuat controller
+// Route::get('/hello', [WelcomeController::class,'hello']);
+
+// Route::get('/', [HomeController::class,'index']);
+
+// Route::get('/about', [AboutController::class,'about']);
+
+// Route::get('/articles/{id}', [ArticleController::class,'articles']);
+
+// //resource controller
+// Route::resource('photos', PhotoController::class);
+
+// // //membuat view
+// // Route::get('/greeting', function () {
+// //     return view('blog.hello', ['name' => 'Azka']);
+// // });
+
+// //menampilkan view dari controller
+// Route::get('/greeting', [WelcomeController::class,
+// 'greeting']);
